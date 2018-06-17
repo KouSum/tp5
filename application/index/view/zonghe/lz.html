@@ -1,0 +1,393 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>市场</title>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="JQ/jquery.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        #myForm
+        {
+            position:relative;
+            left:20px;
+        }
+        #jieguo
+        {
+            position:relative;
+            left:20px;
+        }
+        #bt
+        {
+            position:relative;
+            top:-15px;
+            left:20px;
+        }
+
+
+        #myForm2
+        {
+            position:relative;
+            left:20px;
+        }
+        #jieguo2
+        {
+            position:relative;
+            left:20px;
+        }
+        #bt2
+        {
+            position:relative;
+            top:-15px;
+            left:20px;
+        }
+        #bt3
+        {
+            position:relative;
+            top:-15px;
+            left:20px;
+        }
+    </style>
+    <script>
+
+        function sx(){
+            window.location.reload();
+        }
+    </script>
+<body>
+	2018年3月10日20:00:51
+<SCRIPT>
+
+
+    function changeAction2()
+    {
+
+        var baohan="";
+        var zz=/\n/;
+        var x=document.getElementById("fname2").value;
+        x=x.trim();//去除首尾空白字符
+        var a=x.split(zz);
+        var vv="";
+
+        for (var i=0;i<a.length;i++)
+        {
+            var baohanpz="";
+            var bmcf="";
+            var gg="";
+            var jia= a[i].split(/\s+/);
+            var cc="-";
+            var aa=parseFloat(jia[4]);
+            var dd=parseFloat(jia[5]);
+            switch (true){/*避免重复*/
+                case isNaN(jia[3]):
+                    bmcf=jia[3];
+                    break;
+                default:
+                    bmcf=jia[2];
+            }
+
+            if(baohan.indexOf(bmcf) <= 0 ){
+
+                baohan=baohan+" "+bmcf;
+
+                for (var i2=0;i2<a.length;i2++) {
+                    var jia2 = a[i2].split(/\s+/);
+                    var yy=parseFloat(jia2[5]);
+                    if (jia[3]===jia2[3]){
+                        if (jia2[4]==="-"){
+                            gg=gg+"";
+                        }else {
+                            if(baohanpz.indexOf(jia2[2]) <= 0 )
+                            {
+
+                                baohanpz = baohanpz + jia2[2];
+                                switch (true) {
+
+                                    case yy > 0:
+                                        gg = gg + jia2[2] + "上调至" + jia2[4] + "元/吨，";
+                                        break;
+                                    case yy < 0:
+                                        gg = gg + jia2[2]+ "下调至" + jia2[4] + "元/吨，";
+                                        break;
+                                    default:
+                                        gg = gg + jia2[2] + "报" + jia2[4] + "元/吨，";
+                                        break;
+                                }
+
+                            }
+                        }
+
+                    }
+                    console.log(jia2[2]);
+                }
+
+
+
+/*                 gg = gg.split(/，/);
+                console.log(gg);
+
+
+                 //去除重复元素
+                function uniqueArray(data){
+                    data = data || [];
+                    var a = {};
+                    for (var i=0; i<data.length; i++) {
+                        var v = data[i];
+                        if (typeof(a[v]) === 'undefined'){
+                            a[v] = 1;
+                        }
+                    }
+                    data.length=0;
+                    for (var i in a){
+                        data[data.length] = i;
+                    }
+                    return data;
+                }
+                /!*gg=uniqueArray(gg).toString();*!///下面已经包含此代码
+                console.log(uniqueArray(gg).toString());//不能删
+                console.log(gg);*/
+
+
+
+
+                if (isNaN(jia[3])){
+                    if(gg===""){
+
+                    }else {
+
+                        if (jia[5]===cc) {
+                            var c = jia[3] + jia[1] + "市场价暂稳" + '\n' + "=" + jia[1] + '\n' + "    " + jia[3] +jia2[1] + "市场主流价，"+gg +"较前一交易日持平。"+ '\n\n\n';
+                            document.getElementById("jieguo2").innerHTML = document.getElementById("jieguo2").innerHTML + c;
+                        }
+                        else {
+
+                            if (dd > 0) {
+                                var c = jia[3] + jia[1] + "市场价" +"上调"+ '\n' + "=" + jia[1] + '\n' + "    " + jia[3]+jia2[1] + "市场主流价，"+gg.substring(0,gg.length-1) + '。\n\n\n';
+                                document.getElementById("jieguo2").innerHTML = document.getElementById("jieguo2").innerHTML + c;
+                            }
+                            else {
+
+                                if (dd < 0) {
+                                    var c = jia[3] + jia[1] + "市场价" +"下调"+ '\n' + "=" + jia[1] + '\n' + "    " + jia[3]+jia2[1] + "市场主流价，"+gg.substring(0,gg.length-1) + '。\n\n\n';
+                                    document.getElementById("jieguo2").innerHTML = document.getElementById("jieguo2").innerHTML + c;
+                                }
+                            }
+                        }
+                    }
+
+
+                    console.log(jia[3]);
+                }else{
+                    if (jia[4]===cc) {
+                        var c = jia[2] + jia[1] + "市场价暂稳" + '\n' + "=" + jia[1] + '\n' + "    " + jia[2]+ jia[1] + "市场主流价"+jia[3] + "元/吨，"+"较前一交易日持平。"+ '\n\n\n';
+                        document.getElementById("jieguo2").innerHTML = document.getElementById("jieguo2").innerHTML + c;
+                    }
+                    else {
+
+                        if (aa > 0) {
+                            var c = jia[2] + jia[1] + "市场价" +"上调"+ '\n' + "=" + jia[1] + '\n' + "    " + jia[2]+ jia[1] + "市场主流价上调至"+jia[3] + "元/吨" + '\n\n\n';
+                            document.getElementById("jieguo2").innerHTML = document.getElementById("jieguo2").innerHTML + c;
+                        }
+                        else {
+
+                            if (aa < 0) {
+                                var c = jia[2] + jia[1] + "市场价" +"下调"+ '\n' + "=" + jia[1] + '\n' + "    " + jia[2]+ jia[1] + "市场主流价下调至"+jia[3] + "元/吨"+ '\n\n\n';
+                                document.getElementById("jieguo2").innerHTML = document.getElementById("jieguo2").innerHTML + c;
+                            }
+                        }
+                    }
+                    console.log(jia[3]);
+                }
+            }
+
+
+
+
+
+
+
+
+
+
+
+        }
+
+    }
+
+    function changeAction()
+    {
+        var bmcf="";
+        var baohan="";
+        var zz=/\n/;
+        var x=document.getElementById("fname2").value;
+        x=x.trim();//去除首尾空白字符
+        var a=x.split(zz);
+
+
+        for (var i=0;i<a.length;i++)
+        {
+            var baohanpz="";
+            var gg="";
+            var jia= a[i].split(/\s+/);
+            var cc="-";
+            var aa=parseFloat(jia[5]);
+            var dd=parseFloat(jia[6]);
+            switch (true){
+                case isNaN(jia[4]):
+                    bmcf=jia[4];
+                    break;
+                default:
+                    bmcf=jia[3];
+            }
+            if(baohan.indexOf(bmcf) <= 0 ){
+
+                baohan=baohan+" "+bmcf;
+
+                for (var i2=0;i2<a.length;i2++) {
+                    var jia2 = a[i2].split(/\s+/);
+                    var yy=parseFloat(jia2[6]);
+                    if (jia[4]==jia2[4]){
+                        if (jia2[5]==="-"){
+                            gg=gg+"";
+                        }else {
+                            if(baohanpz.indexOf(jia2[2]) < 0 ){
+
+                                baohanpz=baohanpz+jia2[2];
+
+                            switch (true) {
+
+                                case yy > 0:
+                                    gg = gg + jia2[2] + "上调至" + jia2[5] + "元/吨，";
+                                    break;
+                                case yy < 0:
+                                    gg = gg + jia2[2] + "下调至" + jia2[5] + "元/吨，";
+                                    break;
+                                default:
+                                    gg = gg + jia2[2] + "报" + jia2[5] + "元/吨，";
+                                    break;
+                            }
+                            }
+                            console.log(baohanpz.indexOf(jia2[2].toString()) );
+                            console.log(baohanpz);
+                            console.log(jia2[2]);
+                        }
+                    }
+
+                }
+
+                console.log(jia[4]);
+
+
+/*                gg = gg.split(/，/);
+                console.log(gg);
+
+
+                //去除重复元素
+                function uniqueArray(data){
+                    data = data || [];
+                    var a = {};
+                    for (var i=0; i<data.length; i++) {
+                        var v = data[i];
+                        if (typeof(a[v]) === 'undefined'){
+                            a[v] = 1;
+                        }
+                    }
+                    data.length=0;
+                    for (var i in a){
+                        data[data.length] = i;
+                    }
+                    return data;
+                }
+                /!*gg=uniqueArray(gg).toString();*!///下面已经包含此代码
+                console.log(uniqueArray(gg).toString());//不能删
+                console.log(gg);*/
+
+
+
+
+
+
+                console.log(bmcf);
+
+
+
+
+                if (isNaN(jia[4])){
+                    if(gg===""){
+
+                    }else {
+                        if (jia[6]==cc) {
+                            var c = jia[4] + jia[1] + "出厂价暂稳" + '\n' + "=" + jia[1] + '\n' + "    " + jia[4]+ jia2[1] + "出厂价，"  +gg +"较前一交易日持平。"+ '\n\n\n';
+                            document.getElementById("jieguo2").innerHTML = document.getElementById("jieguo2").innerHTML + c;
+                        }
+                        else {
+
+                            if (dd > 0) {
+                                var c = jia[4] + jia[1] + "出厂价" +"上调"+ '\n' + "=" + jia[1] + '\n' + "    " + jia[4]+ jia2[1] + "出厂价，" +gg.substring(0,gg.length-1) + '。\n\n\n';
+                                document.getElementById("jieguo2").innerHTML = document.getElementById("jieguo2").innerHTML + c;
+                            }
+                            else {
+
+                                if (dd < 0) {
+                                    var c = jia[4] + jia[1] + "出厂价" +"下调"+ '\n' + "=" + jia[1] + '\n' + "    " + jia[4]+ jia2[1] + "出厂价，" +gg.substring(0,gg.length-1) + '。\n\n\n';
+                                    document.getElementById("jieguo2").innerHTML = document.getElementById("jieguo2").innerHTML + c;
+                                }
+                            }
+                        }
+                    }
+
+
+                }else{
+                    if (jia[5]==cc) {
+                        var c = jia[3] + jia[1] + "出厂价暂稳" + '\n' + "=" + jia[1] + '\n' + "    " + jia[3]+ jia[1] + "出厂价"+jia[4] + "元/吨，"+"较前一交易日持平。"+ '\n\n\n';
+                        document.getElementById("jieguo2").innerHTML = document.getElementById("jieguo2").innerHTML + c;
+                    }
+                    else {
+
+                        if (aa > 0) {
+                            var c = jia[3] + jia[1] + "出厂价" +"上调"+ '\n' + "=" + jia[1] + '\n' + "    " + jia[3]+ jia[1] + "出厂价上调至"+jia[4] + "元/吨" + '\n\n\n';
+                            document.getElementById("jieguo2").innerHTML = document.getElementById("jieguo2").innerHTML + c;
+                        }
+                        else {
+
+                            if (aa < 0) {
+                                var c = jia[3] + jia[1] + "出厂价" +"下调"+ '\n' + "=" + jia[1] + '\n' + "    " + jia[3]+ jia[1] + "出厂价下调至"+jia[4] + "元/吨"+ '\n\n\n';
+                                document.getElementById("jieguo2").innerHTML = document.getElementById("jieguo2").innerHTML + c;
+                            }
+                        }
+                    }
+                }
+            }
+
+
+
+
+        }
+
+    }
+
+</SCRIPT>
+<!--<form action="1.js" method="post">
+    <label></label>
+    <textarea placeholder="字符串转xml" cols="50" rows="10" name="fname" ></textarea>
+    </br><input type="submit" value="提交">
+
+</form>-->
+<div><br></div>
+
+<div>
+    <form  id="myForm2" >
+
+        <textarea   cols="80" rows="10"  id="fname2"></textarea>
+        ​
+        <button id="bt2" class="btn btn-primary" type="button" onClick="changeAction2()">市场</button>
+        <button id="bt" class="btn btn-primary" type="button" onClick="changeAction()">厂家</button>
+        <button id="bt3" class="btn btn-primary" type="button" onClick="sx()">刷新</button>
+    </form>
+
+    <textarea  cols="80" rows="20"  id="jieguo2"></textarea>
+</div>
+
+
+</body>
+</html>
